@@ -2,7 +2,7 @@ import {expect} from "chai";
 import "mocha";
 import * as parse5 from "parse5";
 
-import {transform, getAttr, h, hasClass} from "../src";
+import {getAttr, h, hasClass, transform} from "../src";
 
 describe("Html transform", function() {
   it("does nothing", function() {
@@ -83,18 +83,18 @@ describe("Html transform", function() {
   });
 
   it("whole document", function() {
-    const input = '<!DOCTYPE html><html><head><title>foo</title></head><body><div>foo</div></body></html>'
+    const input = "<!DOCTYPE html><html><head><title>foo</title></head><body><div>foo</div></body></html>";
 
-    const res = transform(input, {fragment: false})
-    expect(res).to.equal(input)
-  })
+    const res = transform(input, {fragment: false});
+    expect(res).to.equal(input);
+  });
 
   it("example 1", function() {
     const input = "<div><p class=\"text-center\">Some text</p></div>";
     const output = "<div><tr><td class=\"text-center\">Some text</td></tr></div>";
     const res = transform(input, {
       replaceTags: {
-        p: node => h("tr", [], [
+        p: (node) => h("tr", [], [
           h("td", node.attrs, node.childNodes)
         ])
       }

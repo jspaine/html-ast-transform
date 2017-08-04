@@ -1,4 +1,4 @@
-export {default as transform} from './html-ast-transform'
+export {default as transform} from "./html-ast-transform";
 
 export {
   getAttr,
@@ -6,4 +6,4 @@ export {
   hasClass,
   withAttr,
   withClass
-} from './helpers'
+} from "./helpers";
