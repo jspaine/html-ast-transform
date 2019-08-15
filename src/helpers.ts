@@ -6,7 +6,7 @@ export const nodeTypes = {
 };
 
 export function getAttr(node: parse5.DefaultTreeElement, name: string): string | undefined {
-  const attr = node.attrs.find((attr) => attr.name === name);
+  const attr = node.attrs ? node.attrs.find((attr) => attr.name === name) : null;
   return attr && attr.value;
 }
 
