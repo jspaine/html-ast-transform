@@ -1,11 +1,11 @@
 import * as parse5 from "parse5";
 
 export type ReducerTransform = (
-  acc: parse5.AST.Default.Node[],
-  node: parse5.AST.Default.Element
-) => parse5.AST.Default.Node[];
+  acc: parse5.Node[],
+  node: parse5.Element
+) => parse5.Node[];
 
-export type MapTransform = (node: parse5.AST.Default.Element) => parse5.AST.Default.Node;
+export type MapTransform = (node: parse5.Element) => parse5.Node;
 
 export interface ReplaceTag {
   [tagName: string]: string | string[] | MapTransform;

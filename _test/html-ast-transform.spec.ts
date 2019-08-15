@@ -50,7 +50,7 @@ describe("Html transform", function() {
     const input = "<div><p>A paragraph<span>Nested span</span></p></div>";
     const output = "<div><div>A paragraph<span>Nested span</span></div></div>";
     const replaceTags = {
-      p: (node: parse5.AST.Default.Element) => h("div", [], node.childNodes)
+      p: (node: parse5.DefaultTreeParentNode) => h("div", [], node.childNodes)
     };
 
     const res = transform(input, {replaceTags});
@@ -94,7 +94,7 @@ describe("Html transform", function() {
     const output = "<div><tr><td class=\"text-center\">Some text</td></tr></div>";
     const res = transform(input, {
       replaceTags: {
-        p: (node) => h("tr", [], [
+        p: (node: parse5.DefaultTreeElement) => h("tr", [], [
           h("td", node.attrs, node.childNodes)
         ])
       }
@@ -107,7 +107,7 @@ describe("Html transform", function() {
     const input = "<p>Text with <a href='example.com'>a link</a><img alt='and an image' /></p>";
     const output = "\nText with a link [example.com] [and an image]";
 
-    const stringify = (acc: parse5.AST.Default.Node[], node: parse5.AST.Default.Element) => {
+    const stringify = (acc: parse5.Node[], node: parse5.DefaultTreeElement) => {
       if (node.nodeName !== "a") {
         return acc.concat(node);
       }
@@ -119,7 +119,7 @@ describe("Html transform", function() {
       );
     };
 
-    const getAltText = (node: parse5.AST.Default.Element) => {
+    const getAltText = (node: parse5.DefaultTreeElement) => {
       const alt = getAttr(node, "alt");
       return h("#text", alt ? ` [${alt}]` : "");
     };
@@ -136,7 +136,7 @@ describe("Html transform", function() {
   });
 });
 
-function stringifyLinks(acc: parse5.AST.Default.Node[], node: parse5.AST.Default.Element) {
+function stringifyLinks(acc: parse5.Node[], node: parse5.DefaultTreeElement) {
   if (node.nodeName !== "a") {
     return acc.concat(node);
   }
