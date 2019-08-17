@@ -1,6 +1,6 @@
 {
   "name": "html-ast-transform",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Flexible html transformations by mapping/reducing an AST",
   "main": "dist/html-ast-transform.js",
   "scripts": {
