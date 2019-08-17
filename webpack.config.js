@@ -11,8 +11,7 @@ module.exports = {
     filename: '[name].js',
     library: 'HtmlAstTransform',
     libraryTarget: 'umd',
-    umdNamedDefine: true,
-    globalObject: 'typeof self !== \'undefined\' ? self : this',
+    umdNamedDefine: true
   },
   module: {
     rules: [{
@@ -22,7 +21,7 @@ module.exports = {
         {
           loader: 'babel-loader',
           query: {
-            presets: [['@babel/preset-env']]
+            presets: [['es2015', {modules: false}]]
           }
         },
         'ts-loader'
@@ -42,8 +41,14 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-  ],
-  optimization: {
-    minimize: true,
-  }
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js/,
+      compress: true,
+      sourceMap: true
+    })
+  ]
 }
